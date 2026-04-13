@@ -76,12 +76,12 @@
     <!-- Header -->
     <header class="dash-header">
       <div class="dash-title-group">
-        <p>Akses: <strong id="admin-name" style="color:var(--text-primary);">Administrator</strong></p>
-        <h1>Riwayat <span class="gradient-text">Visitor Induction</span></h1>
-        <p>Memantau kepatuhan induksi keselamatan kerja secara real-time</p>
+        <p><span data-i18n="Akses:">Akses:</span> <strong id="admin-name" style="color:var(--text-primary);">Administrator</strong></p>
+        <h1 data-i18n="Riwayat Visitor Induction">Riwayat Visitor Induction</h1>
+        <p data-i18n="Memantau kepatuhan induksi keselamatan kerja secara real-time">Memantau kepatuhan induksi keselamatan kerja secara real-time</p>
       </div>
       <div style="display:flex; gap:1rem; align-items:center;">
-        <button class="logout-btn" onclick="handleLogout()">Keluar Portal</button>
+        <button class="logout-btn" onclick="handleLogout()" data-i18n="Keluar Portal">Keluar Portal</button>
       </div>
     </header>
 
@@ -91,21 +91,21 @@
         <div class="stat-icon">👥</div>
         <div class="stat-info">
           <span class="stat-val" id="stat-total">0</span>
-          <span class="stat-label">Total Visitor</span>
+          <span class="stat-label" data-i18n="Total Visitor">Total Visitor</span>
         </div>
       </div>
       <div class="stat-card">
         <div class="stat-icon">🕒</div>
         <div class="stat-info">
           <span class="stat-val" id="stat-today">0</span>
-          <span class="stat-label">Pengunjung Hari Ini</span>
+          <span class="stat-label" data-i18n="Pengunjung Hari Ini">Pengunjung Hari Ini</span>
         </div>
       </div>
       <div class="stat-card">
         <div class="stat-icon">🎯</div>
         <div class="stat-info">
           <span class="stat-val" id="stat-completed">0</span>
-          <span class="stat-label">Sertifikat Selesai</span>
+          <span class="stat-label" data-i18n="Sertifikat Selesai">Sertifikat Selesai</span>
         </div>
       </div>
     </div>
@@ -115,10 +115,10 @@
       <div class="table-toolbar">
         <div class="search-box">
           <span>🔍</span>
-          <input type="text" id="visitor-search" placeholder="Cari by nama atau perusahaan..." oninput="filterVisitors()" />
+          <input type="text" id="visitor-search" placeholder="Cari by nama atau perusahaan..." data-i18n-placeholder="Cari by nama atau perusahaan..." oninput="filterVisitors()" />
         </div>
         <div style="display:flex; gap:0.5rem;">
-          <button class="btn btn-secondary" style="font-size:0.8rem; padding: 0.6rem 1rem;" onclick="refreshData()">↻ Refresh Data</button>
+          <button class="btn btn-secondary" style="font-size:0.8rem; padding: 0.6rem 1rem;" onclick="refreshData()" data-i18n="↻ Refresh Data">↻ Refresh Data</button>
         </div>
       </div>
       
@@ -126,11 +126,11 @@
         <table class="dash-table">
           <thead>
             <tr>
-              <th>Visitor</th>
-              <th>Perusahaan / Jabatan</th>
-              <th>Status Induksi</th>
-              <th>Waktu Selesai</th>
-              <th style="text-align:right;">Opsi</th>
+              <th data-i18n="Visitor">Visitor</th>
+              <th data-i18n="Perusahaan / Jabatan">Perusahaan / Jabatan</th>
+              <th data-i18n="Status Induksi">Status Induksi</th>
+              <th data-i18n="Waktu Selesai">Waktu Selesai</th>
+              <th style="text-align:right;" data-i18n="Opsi">Opsi</th>
             </tr>
           </thead>
           <tbody id="visitor-table-body">
@@ -142,7 +142,7 @@
       <!-- Empty State -->
       <div id="empty-state" style="padding:4rem; text-align:center; display:none;">
         <div style="font-size:3rem; margin-bottom:1rem; opacity:0.3;">📂</div>
-        <h3 style="color:var(--text-muted);">Belum ada data visitor.</h3>
+        <h3 style="color:var(--text-muted);" data-i18n="Belum ada data visitor.">Belum ada data visitor.</h3>
       </div>
     </div>
   </div>
@@ -150,7 +150,7 @@
   <div id="loading-overlay" class="loading-overlay">
     <div style="text-align:center;">
        <div class="spinner-border" style="width:3rem; height:3rem; margin-bottom:1rem;"></div>
-       <p style="font-weight:600; color:var(--text-secondary);">Memuat data...</p>
+       <p style="font-weight:600; color:var(--text-secondary);" data-i18n="Memuat data...">Memuat data...</p>
     </div>
   </div>
 

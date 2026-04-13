@@ -291,7 +291,30 @@ const translations = {
     // Additional for consistency
     "Jobsite PT Bumi Suksesindo": "PT Bumi Suksesindo Jobsite",
     "End-to-End Encrypted": "End-to-End Encrypted",
-    "Tanamkan Keselamatan, Panen Kebahagiaan": "Safe Practice, Happy Life"
+    "Tanamkan Keselamatan, Panen Kebahagiaan": "Safe Practice, Happy Life",
+
+    // Admin Pages
+    "Admin Portal": "Admin Portal",
+    "Silakan login untuk memantau data visitor": "Please login to monitor visitor data",
+    "Masukkan NRP atau Email...": "Enter NRP or Email...",
+    "Masuk ke Dashboard": "Login to Dashboard",
+    "← Kembali ke Halaman Utama": "← Back to Home Page",
+    "Riwayat Visitor Induction": "Visitor Induction History",
+    "Memantau kepatuhan induksi keselamatan kerja secara real-time": "Monitor safety induction compliance in real-time",
+    "Keluar Portal": "Logout Portal",
+    "Total Visitor": "Total Visitors",
+    "Pengunjung Hari Ini": "Today's Visitors",
+    "Sertifikat Selesai": "Certificates Completed",
+    "Cari by nama atau perusahaan...": "Search by name or company...",
+    "↻ Refresh Data": "↻ Refresh Data",
+    "Visitor": "Visitor",
+    "Perusahaan / Jabatan": "Company / Position",
+    "Status Induksi": "Induction Status",
+    "Waktu Selesai": "Completion Time",
+    "Opsi": "Options",
+    "Belum ada data visitor.": "No visitor data yet.",
+    "Akses:": "Access:",
+    "Memuat data...": "Loading data..."
   },
   id: {
     // Navbar & Security
@@ -310,6 +333,29 @@ const translations = {
     "Mulai Sesi Induksi": "Mulai Sesi Induksi",
     "Monitor Data & Dashboard": "Monitor Data & Dashboard",
     "Pilih Bahasa": "Pilih Bahasa",
+
+    // Admin Pages
+    "Admin Portal": "Admin Portal",
+    "Silakan login untuk memantau data visitor": "Silakan login untuk memantau data visitor",
+    "Masukkan NRP atau Email...": "Masukkan NRP atau Email...",
+    "Masuk ke Dashboard": "Masuk ke Dashboard",
+    "← Kembali ke Halaman Utama": "← Kembali ke Halaman Utama",
+    "Riwayat Visitor Induction": "Riwayat Visitor Induction",
+    "Memantau kepatuhan induksi keselamatan kerja secara real-time": "Memantau kepatuhan induksi keselamatan kerja secara real-time",
+    "Keluar Portal": "Keluar Portal",
+    "Total Visitor": "Total Visitor",
+    "Pengunjung Hari Ini": "Pengunjung Hari Ini",
+    "Sertifikat Selesai": "Sertifikat Selesai",
+    "Cari by nama atau perusahaan...": "Cari by nama atau perusahaan...",
+    "↻ Refresh Data": "↻ Refresh Data",
+    "Visitor": "Visitor",
+    "Perusahaan / Jabatan": "Perusahaan / Jabatan",
+    "Status Induksi": "Status Induksi",
+    "Waktu Selesai": "Waktu Selesai",
+    "Opsi": "Opsi",
+    "Belum ada data visitor.": "Belum ada data visitor.",
+    "Akses:": "Akses:",
+    "Memuat data...": "Memuat data...",
 
     // Registration Page Items
     "Data Diri": "Data Diri",
