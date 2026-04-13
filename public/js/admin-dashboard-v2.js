@@ -243,6 +243,7 @@ async function downloadVisitorPDF(visitor) {
   btn.innerHTML = '<span class="spinner-border" style="width:1rem; height:1rem;"></span> Processing...';
   btn.disabled = true;
 
+  try {
     // 1. Prepare Template
     preparePrintForm(visitor, health);
     document.body.classList.add('pdf-exporting'); // Match declaration.js
