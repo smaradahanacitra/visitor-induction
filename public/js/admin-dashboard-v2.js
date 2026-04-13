@@ -243,9 +243,9 @@ async function downloadVisitorPDF(visitor) {
   btn.innerHTML = '<span class="spinner-border" style="width:1rem; height:1rem;"></span> Processing...';
   btn.disabled = true;
 
-  try {
     // 1. Prepare Template
     preparePrintForm(visitor, health);
+    document.body.classList.add('pdf-exporting'); // Match declaration.js
     
     // 2. Generate PDF using html2pdf
     const element = document.getElementById('print-area');
@@ -271,19 +271,20 @@ async function downloadVisitorPDF(visitor) {
           if (clonedEl) {
             clonedEl.style.display = 'block';
             clonedEl.style.visibility = 'visible';
-            clonedEl.style.position = 'static';
-            clonedEl.style.left = '0';
           }
         }
       },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }
     };
 
-    await html2pdf().set(opt).from(element).save();
-    showToast('PDF berhasil diunduh.', 'success');
-  } catch (err) {
-    console.error('PDF Error:', err);
-    showToast('Gagal membuat PDF.', 'error');
+    await html2pdf().set(opt).from(element).save().then(() => {
+      document.body.classList.remove('pdf-exporting');
+      showToast('PDF berhasil diunduh.', 'success');
+    }).catch(err => {
+      document.body.classList.remove('pdf-exporting');
+      console.error('PDF Export error:', err);
+      showToast('Gagal membuat PDF.', 'error');
+    });
   } finally {
     btn.innerHTML = originalText;
     btn.disabled = false;
