@@ -87,7 +87,7 @@ function renderTable() {
     <tr>
       <td>
         <div style="font-weight:700;">${v.nama || 'Tanpa Nama'}</div>
-        <div style="font-size:0.75rem; color:var(--text-muted);">${v.telepon || 'No Telp —'}</div>
+        <div style="font-size:0.75rem; color:var(--text-muted);">${v.no_telpon || v.telepon || 'No Telp —'}</div>
       </td>
       <td>
         <div style="font-weight:600;">${v.perusahaan || 'Personal'}</div>
@@ -169,7 +169,7 @@ function viewDetails(id) {
       </div>
       <div class="detail-item">
         <span class="detail-label">${t('Telepon')}</span>
-        <span class="detail-val">${visitor.telepon || '—'}</span>
+        <span class="detail-val">${visitor.no_telpon || visitor.telepon || '—'}</span>
       </div>
       <div class="detail-item" style="grid-column: 1 / -1;">
         <span class="detail-label">${t('Alamat')}</span>
@@ -303,7 +303,7 @@ function preparePrintForm(visitor, health) {
   setT('p-final-nama',       visitor.nama);
   setT('p-final-perusahaan', visitor.perusahaan);
   setT('p-final-jabatan',    visitor.jabatan);
-  setT('p-final-phone',      visitor.telepon);
+  setT('p-final-phone',      visitor.no_telpon || visitor.telepon);
   setT('p-final-alamat',     visitor.alamat);
   setT('p-final-ename',      visitor.emergency_nama);
   setT('p-final-erel',       visitor.emergency_relasi || visitor.emergency_hub);
@@ -312,7 +312,7 @@ function preparePrintForm(visitor, health) {
   setT('p2-final-nama',       visitor.nama);
   setT('p2-final-perusahaan', visitor.perusahaan);
   setT('p2-final-jabatan',    visitor.jabatan);
-  setT('p2-final-phone',      visitor.telepon);
+  setT('p2-final-phone',      visitor.no_telpon || visitor.telepon);
   setT('p2-final-alamat',     visitor.alamat);
   setT('p2-final-ephone',     visitor.emergency_telp);
   setT('p2-final-ename',      visitor.emergency_nama);
