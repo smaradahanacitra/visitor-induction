@@ -29,21 +29,34 @@ async function handleLogin(e) {
     return;
   }
 
-  // Basic email validation - if no @, assume it might be NRP and require email format
-  let email = emailInput;
-  if (!email.includes('@')) {
-    // Optional: Auto-append domain if your org uses standard emails like nrp@kmb.com
-    // email = `${emailInput}@mnk-bme.com`; 
-    showToast('Harap gunakan alamat email terdaftar.', 'warning');
-    return;
-  }
-
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner-border"></span> Menghubungkan...';
 
+  // Support NRP login
+  let finalEmail = emailInput;
+  if (!finalEmail.includes('@')) {
+    try {
+      const { data: profile, error: nrpError } = await window.supabaseClient
+        .from('profiles')
+        .select('email')
+        .eq('nrp', emailInput)
+        .single();
+
+      if (nrpError || !profile?.email) {
+        throw new Error('NRP tidak ditemukan atau tidak memiliki email terdaftar.');
+      }
+      finalEmail = profile.email;
+    } catch (err) {
+      showToast(err.message, 'error');
+      btn.disabled = false;
+      btn.innerHTML = 'Masuk ke Dashboard';
+      return;
+    }
+  }
+
   try {
     const { data, error } = await window.supabaseClient.auth.signInWithPassword({
-      email: email,
+      email: finalEmail,
       password: password,
     });
 
