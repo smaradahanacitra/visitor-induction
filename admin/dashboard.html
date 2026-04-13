@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <style>
     body { background: var(--bg-primary); display: flex; flex-direction: column; min-height: 100vh; overflow-y: auto; }
     .dash-container { flex: 1; padding: 2rem; max-width: 1400px; margin: 0 auto; width: 100%; }
@@ -43,6 +44,27 @@
     .loading-overlay.show { display: flex; }
     .logout-btn { background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.2); color: var(--accent-red); padding: 0.6rem 1.25rem; font-weight: 700; font-size: 0.85rem; border-radius: 100px; cursor: pointer; transition: all 0.2s; }
     .logout-btn:hover { background: #ef4444; color: #fff; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3); }
+
+    /* Modal Detail Styles */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 1.5rem; opacity: 0; transition: var(--transition); }
+    .modal-overlay.show { display: flex; opacity: 1; }
+    .modal-content { background: #fff; border-radius: var(--radius-lg); width: 100%; max-width: 650px; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: var(--shadow-md); animation: slideUp 0.3s ease-out; }
+    .modal-header { padding: 1.5rem 2rem; border-bottom: 1px solid var(--border-glass); display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; background: #fff; z-index: 10; }
+    .modal-body { padding: 2rem; }
+    .modal-footer { padding: 1.5rem 2rem; border-top: 1px solid var(--border-glass); display: flex; gap: 1rem; justify-content: flex-end; position: sticky; bottom: 0; background: #fff; z-index: 10; }
+    .detail-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-bottom: 2rem; }
+    .detail-item { display: flex; flex-direction: column; gap: 0.25rem; }
+    .detail-label { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .detail-val { font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+    .health-summary { background: #f8fafc; border-radius: 12px; padding: 1.25rem; margin-top: 2rem; }
+    .health-summary h3 { font-size: 0.9rem; margin-bottom: 1rem; color: var(--accent-orange); }
+    .health-item { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px dashed var(--border-glass); font-size: 0.85rem; }
+    .health-item:last-child { border-bottom: none; }
+    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+    /* Print Template Styles (Hidden) */
+    #print-area { display: none; }
+    .print-only { font-family: Arial, sans-serif; }
   </style>
 </head>
 <body>
@@ -155,6 +177,277 @@
   </div>
 
   <div class="toast" id="toast" role="alert" aria-live="polite"></div>
+
+  <!-- Modal Detail -->
+  <div id="detail-modal" class="modal-overlay" onclick="if(event.target === this) closeModal()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 style="font-weight: 800; font-size: 1.25rem;" data-i18n="Detail Visitor">Detail Visitor</h2>
+        <button class="logout-btn" onclick="closeModal()" style="padding: 0.5rem 0.8rem; background: #f1f5f9; border: none; color: var(--text-muted);">✕</button>
+      </div>
+      <div class="modal-body" id="modal-body-content">
+        <!-- Will be filled via JS -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal()" data-i18n="Tutup">Tutup</button>
+        <button class="btn btn-primary" id="btn-download-pdf" style="margin-top: 0; width: auto;" data-i18n="Download PDF">
+          📥 Download PDF
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden Print Area for PDF -->
+  <div id="print-area" class="print-only" style="display:none; position:fixed; left:-9999px;">
+    <!-- PAGE 1 (Induction Rules Part 1) -->
+    <div class="print-page">
+      <div class="print-header">
+        <div class="print-header-col">
+          <div class="p-v-label">No. Dokumen</div>
+          <div class="p-v-val">F-KMB-SHE-BSIB-006-008</div>
+        </div>
+        <div class="print-header-col">
+          <div class="p-v-label">No. Revisi</div>
+          <div class="p-v-val">00</div>
+        </div>
+        <div class="print-header-col">
+          <div class="p-v-label">Tanggal Efektif</div>
+          <div class="p-v-val" style="color:#d00; font-weight:bold;">20/10/2024</div>
+        </div>
+      </div>
+
+      <div class="print-body-3col">
+        <!-- COLUMN 1: Health History -->
+        <div class="p-col p-col-border">
+          <div style="text-align:center; margin-bottom:2mm;">
+            <img src="/assets/logos/kmb.png" style="height:14mm;" onerror="this.src='https://raw.githubusercontent.com/stackblitz/stackblitz-images/main/mnk-bme-logo.png'" />
+          </div>
+
+          <div class="p-text-bold" style="font-size:7pt; margin-bottom:1mm;">HEALTH HISTORY / <span class="p-blue">RIWAYAT KESEHATAN</span></div>
+          <div class="p-text-tiny" style="margin-bottom:1mm; font-style:italic;">
+            If you are sick and need treatment, report it here: (Required) <span class="p-blue">Jika Anda menderita sakit dan membutuhkan pengobatan, laporkan disini: (Required / Wajib diisi)</span>
+          </div>
+          
+          <div class="p-detail-item">
+            <span class="p-detail-label">Allergy / <span class="p-blue">Alergi:</span></span>
+            <span id="p-val-alergi" class="p-detail-val"></span>
+          </div>
+          <div class="p-detail-item" style="height:4mm; margin-bottom:2mm;"></div><!-- Placeholder lines -->
+
+          <div class="p-detail-item">
+            <span class="p-detail-label">Drug use / <span class="p-blue">Pemakaian obat:</span></span>
+            <span id="p-val-obat" class="p-detail-val"></span>
+          </div>
+          <div class="p-detail-item" style="height:4mm; margin-bottom:4mm;"></div>
+
+          <table class="p-table" style="font-size:6pt;">
+            <thead>
+              <tr>
+                <th style="text-align:left;">Health history / <span class="p-blue">Riwayat kesehatan:</span></th>
+                <th style="width:6mm;">Ya</th>
+                <th style="width:6mm;">Tidak</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Heart or other blood vessel disease. <span class="p-blue">Penyakit Jantung atau pembuluh darah lainnya</span></td><td align="center"><div id="h1-y" class="p-checkbox"></div></td><td align="center"><div id="h1-n" class="p-checkbox"></div></td></tr>
+              <tr><td>Chest pain/shortness of breath on excessive activity, asthma. <span class="p-blue">Nyeri dada/sesak napas pada aktivitas berlebihan, asma</span></td><td align="center"><div id="h2-y" class="p-checkbox"></div></td><td align="center"><div id="h2-n" class="p-checkbox"></div></td></tr>
+              <tr><td>Epilepsy, fainting spell. <span class="p-blue">Ayan, serangan pingsan</span></td><td align="center"><div id="h3-y" class="p-checkbox"></div></td><td align="center"><div id="h3-n" class="p-checkbox"></div></td></tr>
+              <tr><td>Recent major surgery. <span class="p-blue">Pembedahan besar yang baru dilakukan</span></td><td align="center"><div id="h4-y" class="p-checkbox"></div></td><td align="center"><div id="h4-n" class="p-checkbox"></div></td></tr>
+              <tr><td>Visual or hearing impairment. <span class="p-blue">Gangguan penglihatan atau pendengaran</span></td><td align="center"><div id="h5-y" class="p-checkbox"></div></td><td align="center"><div id="h5-n" class="p-checkbox"></div></td></tr>
+              <tr><td>Stomach ulcers, chronic_stomach_ulcers. <span class="p-blue">Tukak lambung, sakit maag kronis</span></td><td align="center"><div id="h6-y" class="p-checkbox"></div></td><td align="center"><div id="h6-n" class="p-checkbox"></div></td></tr>
+              <tr><td>OTHERS. <span class="p-blue">Lainnya</span> (tuliskan): <span id="p-val-lainnya" style="border-bottom:0.5px solid #000; display:inline-block; min-width:20mm;"></span></td><td align="center"><div id="h7-y" class="p-checkbox"></div></td><td align="center"><div id="h7-n" class="p-checkbox"></div></td></tr>
+            </tbody>
+          </table>
+
+          <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+            <div class="p-text-tiny" style="width:75%; font-weight:bold;">
+              Are you in a fit condition to carry out activities during the visit? <span class="p-blue">Apakah anda dalam kondisi fit untuk melakukan aktivitas selama kunjungan</span>
+            </div>
+            <div style="display:flex; gap:2mm;">
+              <div style="text-align:center;"><div id="fit-y" class="p-checkbox"></div><br/><span style="font-size:5pt;">Ya</span></div>
+              <div style="text-align:center;"><div id="fit-n" class="p-checkbox"></div><br/><span style="font-size:5pt;">Tidak</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-col p-col-border">
+          <div class="p-title-red" style="margin-bottom:1mm;">PT Kemitraan MNK BME</div>
+          <div style="text-align:center; color:#d00; font-size:6.5pt; margin-bottom:2mm;">
+            Tujuh Bukit Operation PT Bumi Suksesindo,<br/>
+            Dusun Pancer RT/RW 08/01, Kec. Pesanggaran,<br/>
+            Kab. Banyuwangi
+          </div>
+
+          <div class="p-text-bold" style="text-align:center; font-size:7.5pt;">Safety Information for Visitors<br/>(Visitors & Contractors)</div>
+          
+          <div class="p-map-box">
+             <img src="/assets/img/muster.png" alt="Muster Point Map" onerror="this.src='https://raw.githubusercontent.com/stackblitz/stackblitz-images/main/bsi-map-induction.jpg'" />
+          </div>
+
+          <div class="p-emergency-header">Emergency Contact</div>
+          <div style="background:#eee; text-align:center; font-weight:bold; font-size:7.5pt; border:0.5px solid #000; padding:1px;">Nomor Darurat BSI : 0812 33 999 911</div>
+          
+          <table class="p-table" style="margin-top:0; border-top:none;">
+            <tbody>
+              <tr><td style="width:33%;">Citra Smaradahana</td><td style="width:33%;" align="center">SHERQ Officer</td><td style="width:33%;" align="right">085740950400</td></tr>
+              <tr><td>Muhammad Ariffin</td><td align="center">Ast. PJO</td><td align="right">087783328877</td></tr>
+              <tr><td>Armando Y Butar Butar</td><td align="center">PJO PT KMB BSIB</td><td align="right">085244207318</td></tr>
+            </tbody>
+          </table>
+
+          <div class="p-text-tiny" style="margin:2mm 0 1mm;">In an emergency, take the following steps. <span class="p-blue">Dalam kondisi darurat, lakukanlah langkah-langkah berikut:</span></div>
+          <div class="p-text-tiny">
+            1. Shout "EMERGENCY, EMERGENCY, EMERGENCY". <span class="p-blue">Berteriaklah "DARURAT, DARURAT, DARURAT"</span><br/>
+            2. State who you are. <span class="p-blue">Sebutkan siapa diri anda</span><br/>
+            3. State where the emergency location is. <span class="p-blue">Sebutkan dimana lokasi darurat</span><br/>
+            4. Type of emergency condition (example: fire, vehicle accident, chemical spill, etc.). <span class="p-blue">Jenis kondisi darurat (contoh: kebakaran, kecelakaan kendaraan, tumpahan bahan kimia, dll)</span><br/>
+            5. Number of people involved, if anyone is injured or at risk (e.g. seriously injured, trapped, etc.). <span class="p-blue">Jumlah orang yang terlibat, jika ada yang terluka atau terkena risiko (contoh: terluka parah, terjebak, dll)</span><br/>
+            6. Type of help needed. <span class="p-blue">Jenis pertolongan yang dibutuhkan</span>
+          </div>
+        </div>
+
+        <div class="p-col">
+          <div class="p-text-tiny">
+            7. Give a clear and easy to understand message. <span class="p-blue">Beri pesan yang jelas dan mudah dipahami</span><br/>
+            8. Do not break off communication until further instructions are given. <span class="p-blue">Jangan putuskan komunikasi sampai ada instruksi lebih lanjut</span>
+          </div>
+
+          <div style="margin-top:2mm;">
+            <div style="text-align:center; font-style:italic; font-size:6pt; opacity:0.7;">Identify evacuation gathering points. <span class="p-blue">Kenali titik kumpul evakuasi.</span></div>
+          </div>
+
+          <div class="p-title-blue" style="text-align:center; border:none; margin-top:4mm;">COMPANY REGULATION / <span style="text-decoration:underline;">PERATURAN PERUSAHAAN</span></div>
+          
+          <div class="p-text-tiny" style="margin-top:2mm;">
+            <div style="display:flex; gap:1mm;"><span>1.</span><span>Report your presence to the office officer when entering and leaving the operation area PT KMB jobsite BSIS to the Security. <span class="p-blue">Laporkan kehadiran anda pada saat memasuki dan meninggalkan area operasional PT KMB Jobsite BSIB pada petugas keamanan PT BSI.</span></span></div>
+            <div style="display:flex; gap:1mm; margin-top:0.5mm;"><span>2.</span><span>The office officer has the authority to check visitors / contractors including their luggage when entering and / or leaving the office. <span class="p-blue">Petugas kantor memiliki kewenangan untuk memeriksa visitor/kontraktor termasuk bawaannya saat memasuki dan atau meninggalkan kantor</span></span></div>
+            <div style="display:flex; gap:1mm; margin-top:0.5mm;"><span>3.</span><span>Unauthorized people are not allowed to enter the office. <span class="p-blue">Bagi orang yang tidak berkepentingan tidak diperkenankan masuk ke area perusahaan PT KMB Jobsite PT Bumi Suksesindo.</span></span></div>
+            <div style="display:flex; gap:1mm; margin-top:0.5mm;"><span>4.</span><span>All people entering PT KMB Jobsite PT BSI premises must follow the regulation of Site Spesific Prosedur and Golden Rules. <span class="p-blue">Semua orang yang memasuki lingkungan perusahaan PT KMB Jobsite PT BSI wajib mengikuti seluruh peraturan perusahaan yang berlaku baik aturan Site Spesific Prosedur maupun Golden Rules.</span></span></div>
+            <div style="display:flex; gap:1mm; margin-top:0.5mm;"><span>5.</span><span>All people entering the company premises are prohibited to carry sharp weapons and alcohol / illegal drugs. 0% alcohol limit. <span class="p-blue">Semua orang yang memasuki lingkungan perusahaan dilarang membawa senjata tajam dan alkohol/ obat obatan tak resmi. Batas kadar Alkohol adalah 0%.</span></span></div>
+            <div style="display:flex; gap:1mm; margin-top:0.5mm;"><span>6.</span><span>PT KMB's work location is a non-smoking area. Smoking is not permitted throughout PT KMB's operational areas including in vehicles. <span class="p-blue">Secara umum, seluruh area Tujuh Bukit Operation merupakan Kawasan Tanok Rokok. Merokok hanya diperbolehkan pada area Tempat Khusus Merokok (TKM) yang telah ditentukan.</span></span></div>
+            <div style="display:flex; gap:1mm; margin-top:0.5mm;"><span>7.</span><span>When you work, it is your responsibility to clean the work area when the work has been completed or at the end of the work day. <span class="p-blue">Selama bekerja, adalah menjadi tanggung jawab anda untuk membersihkan area kerja ketika pekerjaan sudah selesai atau pada akhir waktu kerja hari itu</span></span></div>
+            <div style="display:flex; gap:1mm; margin-top:0.5mm;"><span>8.</span><span>In the event of an incident or potential danger, report it as soon as possible or latest at the end of the workday to PT KMB (injury, unsafe conditions, spills, etc.). <span class="p-blue">Apabila terjadi kejadian atau potensi bahaya, laporkan sesegera mungkin atau paling lambat pada akhir hari kerja</span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="print-footer">General</div>
+    </div>
+
+    <!-- PAGE 2 (Induction Rules Part 2 & Signatures) -->
+    <div class="html2pdf__page-break"></div>
+    <div class="print-page">
+      <div class="print-header">
+        <div class="print-header-col">
+          <div class="p-v-label">No. Dokumen</div>
+          <div class="p-v-val">F-KMB-SHE-BSIB-006-008</div>
+        </div>
+        <div class="print-header-col">
+          <div class="p-v-label">No. Revisi</div>
+          <div class="p-v-val">00</div>
+        </div>
+        <div class="print-header-col">
+          <div class="p-v-label">Tanggal Efektif</div>
+          <div class="p-v-val" style="color:#d00; font-weight:bold;">20/10/2024</div>
+        </div>
+      </div>
+
+      <div class="print-body-3col">
+        <!-- COLUMN 1 -->
+        <div class="p-col p-col-border">
+          <div class="p-text-tiny" style="margin-bottom:1mm; font-style:italic;">
+            kepada PT.KMB (cedera, kondisi tidak aman, tumpahan, dan lain-lain).
+          </div>
+          <div class="p-text-tiny" style="margin-bottom:2mm;">
+            9. If taking medicine that could impair your ability report to SHERQ Staff. <span class="p-blue">Jika mengkonsumsi obat yang dapat mengganggu kemampuan Anda, laporkan ke SHERQ Staff.</span>
+          </div>
+
+          <div class="p-text-bold p-blue" style="font-size:7.5pt; border-bottom:1px solid #0056b3; margin-bottom:1mm;">FIRST AID / PERTOLONGAN PERTAMA</div>
+          <div class="p-text-tiny" style="margin-bottom:2mm;">
+            The first aid kit required for any type of incident is available in the main office and PT KMB vehicles. <span class="p-blue">Perlengkapan P3K diperlukan untuk segala jenis kecelakaan dan tersedia di kantor dan kendaraan PT KMB.</span>
+          </div>
+
+          <div class="p-text-bold p-blue" style="font-size:7.5pt; border-bottom:1px solid #0056b3; margin-bottom:1mm;">FACILITY / FASILITAS</div>
+          <div class="p-text-tiny" style="margin-bottom:2mm;">
+            1. The toilet is outside the main office. <span class="p-blue">Toilet berada di luar kantor</span><br/>
+            2. Potable water is supplied in the dispensers that are available in pantry. <span class="p-blue">Air minum layak konsumsi terdapat pada dispenser yang tersedia di area Pantry.</span><br/>
+            3. A parking space is available east area Office Building. Pay attention to your safety when parking or moving a vehicle. <span class="p-blue">Area parkir tersedia di sisi timur office PT KMB. Perhatian anda wajib memarkirkan kendaraan anda dengan aman.</span>
+          </div>
+
+          <div class="p-text-bold p-blue" style="font-size:7.5pt; border-bottom:1px solid #0056b3; margin-bottom:1mm;">CONTRACTOR / KONTRAKTOR</div>
+          <div class="p-text-tiny">
+            1. Contractors who work in the PT. KMB area must always sign the Log In-Out book at the time of arriving and leaving the office. <span class="p-blue">Kontraktor yang bekerja untuk PT. KMB harus selalu mengisi daftar hadir baik ketika datang maupun meninggalkan kantor.</span><br/>
+            2. Do not start any work at PT. KMB location without obtaining WORK PERMIT (Permit to Work) from the authorized personnel who issues the work permit certificate. You must follow the work instructions listed on the work permit certificate. <span class="p-blue">Dilarang memulai pekerjaan di PT. KMB tanpa mendapatkan Ijin Kerja dari orang yang berwenang untuk mengeluarkan sertifikat ijin kerja. Anda harus mengikuti instruksi kerja yang terdapat dalam sertifikat ijin kerja.</span><br/>
+            3. Understand JSA in order to know the risk of danger of each work to be done. Ask PT. KMB officer if you don't know yet. <span class="p-blue">Pahami JSA untuk mengetahui risiko bahaya atas setiap pekerjaan yang akan dilakukan. Tanyakan pada petugas PT. KMB jika anda belum mengetahuinya.</span><br/>
+            4. Maintain cleanliness and neatness of your work area at all times. Clean all the dirt / garbage and disposed of it in the designated waste bin place after the job has been completed. <span class="p-blue">Jagalah kebersihan dan kerapian area kerja Anda setiap saat. Bersihkan seluruh kotoran/sampah dan buang pada tempat sampah yang telah ditentukan setelah pekerjaan selesai.</span>
+          </div>
+        </div>
+
+        <!-- COLUMN 2 -->
+        <div class="p-col p-col-border">
+          <div class="p-text-bold p-blue" style="font-size:7.5pt; border-bottom:1px solid #0056b3; margin-bottom:2mm;">BASIC SAFETY RULES / ATURAN POKOK KESELAMATAN</div>
+          <div class="p-text-tiny" style="margin-bottom:3mm;">
+            1. It is Prohibited to operate or modify equipment unless authorized by a competent person. <span class="p-blue">Dilarang mengoperasikan atau memodifikasi peralatan kecuali ada wewenang dari orang yang berkompeten.</span><br/>
+            2. It is Prohibited to operate equipment without following isolation procedures. <span class="p-blue">Dilarang menjalankan peralatan tanpa mengikuti prosedur isolasi.</span><br/>
+            3. It is Prohibited to remove, cut or modify personal protective equipment. <span class="p-blue">Dilarang melepas, memotong atau memodifikasi alat pelindung diri.</span><br/>
+            4. It is Prohibited to work at height without using the necessary personal protective equipment. <span class="p-blue">Dilarang bekerja di ketinggian tanpa menggunakan alat pelindung diri yang dibutuhkan.</span><br/>
+            5. It is Prohibited to use lifting equipment unless authorized, use it not according to its function or in a position under a hanging load. <span class="p-blue">Dilarang menggunakan alat angkat kecuali yang berwenang, menggunakan tidak sesuai fungsinya atau berada di posisi bawah beban yang menggantung.</span><br/>
+            6. It is Prohibited to enter restricted areas without authorization. <span class="p-blue">Dilarang memasuki area terbatas tanpa otorisasi.</span>
+          </div>
+
+          <div class="p-text-bold p-blue" style="font-size:7.5pt; border-bottom:1px solid #0056b3; margin-bottom:1mm;">PERSONAL PROTECTIVE EQUIPMENT (PPE) / ALAT PELINDUNG DIRI (APD)</div>
+          <div class="p-text-tiny" style="margin-bottom:3mm; text-align:justify;">
+            If necessary, PPE will be provided. Please return the equipment before leaving the PT KMB Site Bumi Suksesindo area. PPE must be used in the area designated by the Company Representative. Minimum PPE requirements required in operational areas, namely helmet, safety shoes, long-sleeved collared shirt with a reflector or vest with a reflector and long trousers. <span class="p-blue">Apabila diperlukan, APD akan diberikan. Mohon mengembalikan perlengkapan tersebut sebelum meninggalkan area PT KMB Site Bumi Suksesindo. APD harus digunakan di area yang ditunjuk oleh Perwakilan Perusahaan. Persyaratan penggunaan APD minimum yang dibutuhkan di area operasional, yaitu helm, sepatu keselamatan, baju kerah lengan panjang bereflektor atau rompi bereflektor dan celana panjang.</span>
+          </div>
+
+          <div class="p-text-bold p-blue" style="font-size:7.5pt; border-bottom:1px solid #0056b3; margin-bottom:1mm;">ENVIRONMENT / LINGKUNGAN</div>
+          <div class="p-text-tiny">
+            Throw away rubbish in the trash can. Report all environmental hazards and incidents to your Company Representative. <span class="p-blue">Buanglah sampah pada tempat sampah. Laporkan semua bahaya lingkungan dan insiden kepada Perwakilan Perusahaan Anda.</span>
+          </div>
+        </div>
+
+        <!-- COLUMN 3 (Details & Signature) -->
+        <div class="p-col">
+          <div class="p-text-bold p-blue" style="font-size:7.5pt; border-bottom:1px solid #0056b3; margin-bottom:2mm;">PROHIBITION OF SMOKING / LARANGAN MEROKOK</div>
+          <div class="p-text-tiny" style="margin-bottom:3mm; text-align:justify;">
+            In general, the entire Seven Bukit Operation area is a non-smoking area. Smoking is only permitted in designated Special Smoking Areas (TKM). Visitors must ensure that cigarette butts are extinguished and maintain a clean environment in the TKM area by disposing of cigarette butts in an ashtray or appropriate trash can. <span class="p-blue">Secara umum, seluruh area Tujuh Bukit Operation merupakan Kawasan Tanpa Rokok. Merokok hanya diperbolehkan pada area Tempat Khusus Merokok (TKM) yang telah ditentukan. Pengunjung harus memastikan puntung rokok telah padam dan menjaga kebersihan lingkungan di area TKM dengan membuang puntung rokok di asbak atau tempat sampah yang sesuai setelah selesai merokok.</span>
+          </div>
+
+          <div class="p-text-bold" style="font-size:7pt; margin-bottom:1mm;">EMPLOYEE/VISITOR/CONTRACTOR DETAILS</div>
+          <div style="font-size:6pt; font-style:italic; margin-bottom:2mm; font-weight:bold;">Print Clearly</div>
+          
+          <div style="font-size:6.5pt; margin-bottom:3mm;">
+            <div style="display:flex; margin-bottom:1.5mm;"><span style="width:18mm;">NAME</span><span style="width:3mm;">:</span><div id="p2-final-nama" class="p-underline-dots"></div></div>
+            <div style="display:flex; margin-bottom:1.5mm;"><span style="width:18mm;">COMPANY</span><span style="width:3mm;">:</span><div id="p2-final-perusahaan" class="p-underline-dots"></div></div>
+            <div style="display:flex; margin-bottom:1.5mm;"><span style="width:18mm;">POSITION</span><span style="width:3mm;">:</span><div id="p2-final-jabatan" class="p-underline-dots"></div></div>
+            <div style="display:flex; margin-bottom:1.5mm;"><span style="width:18mm;">PHONE</span><span style="width:3mm;">:</span><div id="p2-final-phone" class="p-underline-dots"></div></div>
+            <div style="display:flex; margin-bottom:1.5mm;"><span style="width:18mm;">ADDRESS</span><span style="width:3mm;">:</span><div id="p2-final-alamat" class="p-underline-dots"></div></div>
+            
+            <div style="display:flex; margin-top:2.5mm;"><span style="width:35mm; font-weight:bold;">Emergency Telephone Number</span><span style="width:3mm;">:</span><div id="p2-final-ephone" class="p-underline-dots"></div></div>
+            <div style="display:flex; margin-top:1.5mm;"><span style="width:35mm;">Name</span><span style="width:3mm;">:</span><div id="p2-final-ename" class="p-underline-dots"></div></div>
+            <div style="display:flex; margin-top:1.5mm;"><span style="width:35mm;">Relation</span><span style="width:3mm;">:</span><div id="p2-final-erel" class="p-underline-dots"></div></div>
+          </div>
+
+          <div class="p-text-tiny" style="text-align:justify; line-height:1.2; font-size:6.5pt;">
+            I declare that I have received and understood the SHERQ Induction from PT. PT KMB. <span class="p-blue">Saya menyatakan telah menerima dan memahami Induksi SHERQ dari PT. PT KMB.</span>
+          </div>
+          <div class="p-text-tiny" style="text-align:justify; line-height:1.2; font-size:6.5pt; margin-top:2mm;">
+            And I will obey the regulation of SHERQ and other designated regulation during the visit and during the work / activities in PT. KMB. <span class="p-blue">Dan saya akan menaati peraturan SHERQ dan peraturan lain yang ditetapkan selama kunjungan dan selama bekerja/beraktivitas di PT. PT KMB</span>
+          </div>
+
+          <div style="margin-top:4mm;">
+            <div style="font-size:6.5pt; font-weight:bold; text-align:center;">SIGNATURE (New Employee/ Visitor/ Contractor):</div>
+            <div style="height:15mm; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; position:relative;">
+              <div id="p-sign-stamp" style="font-size:8pt; font-weight:bold; color:#0056b3; font-style:italic; opacity:0.15; margin-bottom:3mm;">SIGNED DIGITAL</div>
+              <div id="p-sign-date" style="position:absolute; top:2mm; right:5mm; font-size:5pt; opacity:0.5;"></div>
+              <div style="width:60mm; border-top:1px solid #000; margin-top:0;"></div>
+              <div id="p2-sign-name" style="font-size:7.5pt; font-weight:bold; text-transform:uppercase; margin-top:1mm;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="print-footer">General</div>
+    </div>
+  </div>
 
   <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

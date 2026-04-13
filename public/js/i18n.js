@@ -314,7 +314,21 @@ const translations = {
     "Opsi": "Options",
     "Belum ada data visitor.": "No visitor data yet.",
     "Akses:": "Access:",
-    "Memuat data...": "Loading data..."
+    "Memuat data...": "Loading data...",
+    "Detail Visitor": "Visitor Detail",
+    "Tutup": "Close",
+    "Riwayat Kesehatan & Fit Condition": "Health History & Fit Condition",
+    "Kondisi Fit to Work": "Fit to Work Status",
+    "Riwayat Alergi": "Allergy History",
+    "Pemakaian Obat": "Drug Usage",
+    "* Data riwayat penyakit (Jantung, Asma, dll) tersedia lengkap di cetakan PDF.": "* Full medical history (Heart, Asthma, etc.) is available in the PDF export.",
+    "Nama Lengkap": "Full Name",
+    "Perusahaan": "Company",
+    "Jabatan": "Position",
+    "Telepon": "Phone",
+    "Alamat": "Address",
+    "Hubungan": "Relationship",
+    "Telp Darurat": "Emergency Phone"
   },
   id: {
     // Navbar & Security
@@ -544,7 +558,21 @@ const translations = {
     "Sebutkan alergi Anda...": "Sebutkan alergi Anda...",
     "Sebutkan obat yang dikonsumsi...": "Sebutkan obat yang dikonsumsi...",
     "TELAH DISETUJUI SECARA DIGITAL": "TELAH DISETUJUI SECARA DIGITAL",
-    "SIGNATURE / TANDA TANGAN": "TANDA TANGAN"
+    "SIGNATURE / TANDA TANGAN": "TANDA TANGAN",
+    "Detail Visitor": "Detail Visitor",
+    "Tutup": "Tutup",
+    "Riwayat Kesehatan & Fit Condition": "Riwayat Kesehatan & Fit Condition",
+    "Kondisi Fit to Work": "Kondisi Fit to Work",
+    "Riwayat Alergi": "Riwayat Alergi",
+    "Pemakaian Obat": "Pemakaian Obat",
+    "* Data riwayat penyakit (Jantung, Asma, dll) tersedia lengkap di cetakan PDF.": "* Data riwayat penyakit (Jantung, Asma, dll) tersedia lengkap di cetakan PDF.",
+    "Nama Lengkap": "Nama Lengkap",
+    "Perusahaan": "Perusahaan",
+    "Jabatan": "Jabatan",
+    "Telepon": "Telepon",
+    "Alamat": "Alamat",
+    "Hubungan": "Hubungan",
+    "Telp Darurat": "Telp Darurat"
   }
 };
 
