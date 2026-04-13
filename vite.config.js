@@ -11,9 +11,12 @@ export default defineConfig({
     outDir: 'dist',
     rollupOptions: {
       input: {
-        main:    'index.html',
-        video:   'video.html',
-        success: 'success.html',
+        main:            'index.html',
+        registration:    'visitor-registration.html',
+        video:           'video.html',
+        success:         'success.html',
+        admin_login:     'admin/login.html',
+        admin_dashboard: 'admin/dashboard.html',
       },
     },
   },
