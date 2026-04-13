@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#080d1a" />
+  <meta name="description" content="Tonton video induksi keselamatan kerja PT Kemitraan MNK BME." />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <title>Visitor Induction — Video Induksi | PT Kemitraan MNK BME</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/png" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="bg-decoration" aria-hidden="true"></div>
+
+  <nav class="navbar">
+    <div class="nav-brand">
+      <div class="nav-logo-box">
+        <img src="assets/logos/kmb.png" alt="Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <span class="logo-placeholder" style="display:none;">MNK<br>BME</span>
+      </div>
+      <div class="nav-title-group">
+        <div id="visitor-greeting" class="visitor-greeting" style="font-size: 0.75rem; color: var(--accent-orange); font-weight: 700; text-transform: uppercase; margin-bottom: 2px; opacity: 0;">
+          <span data-i18n="Selamat Datang">Selamat Datang</span>, <span id="visitor-name-target">Visitor</span>
+        </div>
+        <span class="navbar-title">PT Kemitraan MNK BME</span>
+        <span class="navbar-subtitle" data-i18n="Jobsite PT Bumi Suksesindo">Jobsite PT Bumi Suksesindo</span>
+      </div>
+    </div>
+    <div class="navbar-actions">
+      <div class="nav-security-badge">
+        <span aria-hidden="true">🔒</span>
+        <span data-i18n="End-to-End Encrypted">End-to-End Encrypted</span>
+      </div>
+      <div class="lang-selector">
+        <button id="btn-lang-id" class="lang-btn active" onclick="switchLanguage('id')">ID</button>
+        <button id="btn-lang-en" class="lang-btn" onclick="switchLanguage('en')">EN</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-wrapper">
+
+    <!-- Company Strip -->
+    <!-- Step Progress -->
+    <div class="step-progress">
+      <div class="step-item">
+        <div class="step-dot done"><div class="step-num">✓</div><span data-i18n="Data Diri">Data Diri</span></div>
+      </div>
+      <div class="step-connector" aria-hidden="true"></div>
+      <div class="step-item">
+        <div class="step-dot active"><div class="step-num">2</div><span data-i18n="Video & Aturan">Video &amp; Aturan</span></div>
+      </div>
+      <div class="step-connector" aria-hidden="true"></div>
+      <div class="step-item">
+        <div class="step-dot inactive"><div class="step-num">3</div><span data-i18n="Pernyataan">Pernyataan</span></div>
+      </div>
+    </div>
+
+    <!-- Video Header -->
+    <div style="text-align:center; padding: 1rem 1.5rem 1.5rem;">
+      <h1 style="font-size:clamp(1.4rem,4vw,2rem); font-weight:800; letter-spacing:-0.03em; margin-bottom:0.5rem; color:var(--text-primary);">
+        <span data-i18n="Video & Aturan Induksi">Video & Aturan Induksi</span>
+      </h1>
+      <p style="color:var(--text-secondary); font-size:0.88rem; max-width:600px; margin:0 auto;" data-i18n="Tonton dan pahami seluruh materi keselamatan di bawah ini sebelum melanjutkan ke tahap pernyataan.">
+        Tonton dan pahami seluruh materi keselamatan di bawah ini sebelum melanjutkan ke tahap pernyataan.
+      </p>
+    </div>
+
+    <!-- Video Layout -->
+    <div class="video-layout">
+      <!-- SIDEBAR: Video List & Induction Link -->
+      <aside class="video-sidebar" role="complementary">
+        <div class="card sidebar-card" style="padding: 1rem; cursor: default;">
+          <div class="card-header" style="margin-bottom: 1rem;">
+            <span class="card-icon">📋</span>
+            <span data-i18n="TAHAPAN INDUKSI">TAHAPAN INDUKSI</span>
+          </div>
+          
+          <div class="video-list" id="video-list-items">
+             <!-- Video 1 -->
+             <button class="video-item" id="video-item-0" data-index="0">
+               <div class="video-item-status pending" id="status-icon-0">❌</div>
+               <div class="video-item-info">
+                 <div class="video-item-title" id="video-title-0">Video 1: Pengenalan K3</div>
+               </div>
+             </button>
+             
+             <!-- Video 2 -->
+             <button class="video-item" id="video-item-1" data-index="1">
+               <div class="video-item-status pending" id="status-icon-1">❌</div>
+               <div class="video-item-info">
+                 <div class="video-item-title" id="video-title-1">Video 2: Prosedur Keselamatan</div>
+               </div>
+             </button>
+
+             <!-- Induction Rules -->
+             <button class="video-item" id="btn-show-rules">
+                <div class="video-item-status pending" id="status-icon-rules">📝</div>
+                <div class="video-item-info">
+                  <div class="video-item-title" data-i18n="ATURAN INDUKSI">ATURAN INDUKSI</div>
+                </div>
+             </button>
+          </div>
+
+          <div class="sidebar-divider" style="height: 1px; background: var(--border-glass); margin: 1.5rem 0;"></div>
+
+          <div class="card-header" style="margin-bottom: 0.5rem; opacity: 0.8;">
+            <span class="card-icon">🔗</span>
+            <span data-i18n="FORMULIR GOOGLE">FORMULIR GOOGLE</span>
+          </div>
+          <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0 0 1rem 0;" data-i18n="Jika sistem internal bermasalah:">Jika sistem internal bermasalah:</p>
+          <a href="https://bit.ly/visitorinductionBSI" target="_blank" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.6rem; width: 100%;">
+            Buka Google Form
+          </a>
+        </div>
+
+        <!-- Progress Bar Tahapan Induksi Video (Modern Bar) -->
+        <div class="progress-footer" style="padding: 1.5rem 1rem;">
+          <div class="modern-progress-container">
+            <div class="modern-progress-labels" style="margin-bottom:0.5rem; justify-content:space-between;">
+              <span style="text-align:left; color:var(--text-primary);" data-i18n="Tahapan Induksi">Tahapan Induksi</span>
+              <span id="progress-text" style="text-align:right; color:var(--accent-orange); font-weight:800;">
+                <span id="prog-done">0</span> <span data-i18n="dari">dari</span> <span id="prog-total">3</span> <span data-i18n="selesai">selesai</span>
+              </span>
+            </div>
+            <div class="modern-progress-bar" style="height: 10px;">
+              <div class="modern-progress-fill" id="progress-fill" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+
+      <!-- MAIN CONTENT: Dynamic Area -->
+      <main class="video-content" id="main-content-area">
+        
+        <!-- View 1: Video Player -->
+        <div id="view-video-player" class="view-pane active">
+          <div class="card video-card">
+            <!-- Video Player First (Full Width) -->
+            <div class="video-wrapper" id="player-wrapper">
+              <div id="player"></div>
+              <!-- Invisible Overlay to Block External Links -->
+              <div class="video-security-overlay" onclick="togglePlayPause()"></div>
+              <div id="player-placeholder" class="player-placeholder">
+                <div class="play-icon">▶️</div>
+                <p data-i18n="Pilih video dari daftar di sebelah untuk memulai">Pilih video dari daftar di sebelah untuk memulai</p>
+              </div>
+            </div>
+
+            <!-- Title & Info Below -->
+            <div class="video-card-content" style="display:flex; justify-content:space-between; align-items:flex-start; gap:1rem;">
+              <div>
+                <h2 id="current-video-title" class="video-title" data-i18n="Pilih video untuk ditonton" style="margin-bottom:0.5rem; font-size:1.5rem;">Pilih video untuk ditonton</h2>
+                <p id="current-video-desc" class="video-desc" data-i18n="Klik salah satu video di sebelah kiri untuk memulai" style="opacity:0.8; font-size:1rem;">Klik salah satu video di sebelah kiri untuk memulai</p>
+              </div>
+              <button class="btn btn-secondary" onclick="toggleFullScreenVideo()" style="padding: 0.6rem 1rem; font-size: 0.85rem; flex-shrink: 0; margin: 0;">
+                <span aria-hidden="true">⛶</span> Full Screen
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- View 2: Induction Rules Reader -->
+        <div id="view-induction-rules" class="view-pane">
+          <div class="card rules-card">
+            <div class="rules-header">
+              <h2 data-i18n="Aturan & Informasi Keselamatan">Aturan & Informasi Keselamatan</h2>
+              <p data-i18n="Penting bagi seluruh visitor dan kontraktor untuk memahami prosedur keselamatan di PT Kemitraan MNK BME Jobsite PT Bumi Suksesindo.">Penting bagi seluruh visitor dan kontraktor untuk memahami prosedur keselamatan di PT Kemitraan MNK BME Jobsite PT Bumi Suksesindo.</p>
+            </div>
+
+            <div class="rules-body scrollable" id="rules-content">
+              <!-- Evacuation -->
+              <div class="rules-section">
+                <h3 data-i18n="rules_evac_title">IDENTIFIKASI TITIK KUMPUL EVAKUASI</h3>
+                <p data-i18n="rules_evac_desc">Kenali titik kumpul evakuasi...</p>
+              </div>
+
+              <!-- Map Section -->
+              <div class="rules-section map-view">
+                <div class="map-container">
+                  <img src="assets/img/muster.png" alt="Muster Point Map" class="induction-map" onerror="this.src='https://raw.githubusercontent.com/stackblitz/stackblitz-images/main/bsi-map-induction.jpg'">
+                  <div class="map-caption" data-i18n="rules_map_caption">Identifikasi titik kumpul evakuasi (Muster Point)</div>
+                </div>
+              </div>
+
+              <!-- Emergency Section -->
+              <div class="rules-section emergency">
+                <h3 data-i18n="rules_em_title">KONTAK DARURAT</h3>
+                <div style="background:var(--accent-red); color:#fff; padding:0.75rem; border-radius:8px; text-align:center; font-weight:800; margin-bottom:1rem;">
+                  <span data-i18n="rules_em_num">Nomor Darurat BSI: 0812 33 999 911</span>
+                </div>
+                <p class="strong" data-i18n="rules_em_steps_title">Langkah-langkah dalam Kondisi Darurat:</p>
+                <ul>
+                  <li data-i18n="rules_em_step1">Berteriaklah "DARURAT, DARURAT, DARURAT"</li>
+                  <li data-i18n="rules_em_step2">Sebutkan siapa diri anda</li>
+                  <li data-i18n="rules_em_step3">Sebutkan dimana lokasi darurat</li>
+                  <li data-i18n="rules_em_step4">Jenis kondisi darurat</li>
+                  <li data-i18n="rules_em_step5">Jumlah orang yang terlibat</li>
+                  <li data-i18n="rules_em_step6">Jenis pertolongan yang dibutuhkan</li>
+                  <li data-i18n="rules_em_step7">Beri pesan yang jelas dan mudah dipahami</li>
+                  <li data-i18n="rules_em_step8">Jangan putuskan komunikasi sampai ada instruksi lebih lanjut</li>
+                </ul>
+              </div>
+
+              <!-- COMPANY RULES -->
+              <div class="rules-section">
+                <h3 data-i18n="rules_comp_title">PERATURAN PERUSAHAAN (COMPANY RULES)</h3>
+                <div class="rules-list">
+                  <div class="rules-item"><span>1.</span> <span data-i18n="rule_1">Melaporkan kehadiran...</span></div>
+                  <div class="rules-item"><span>2.</span> <span data-i18n="rule_2">Petugas kantor memiliki...</span></div>
+                  <div class="rules-item"><span>3.</span> <span data-i18n="rule_3">Orang yang tidak berkepentingan...</span></div>
+                  <div class="rules-item"><span>4.</span> <span data-i18n="rule_4">Semua orang yang memasuki...</span></div>
+                  <div class="rules-item"><span>5.</span> <span data-i18n="rule_5">Dilarang membawa senjata...</span></div>
+                  <div class="rules-item"><span>6.</span> <span data-i18n="rule_6">Dilarang mengoperasikan...</span></div>
+                  <div class="rules-item"><span>7.</span> <span data-i18n="rule_7">Dilarang menjalankan...</span></div>
+                  <div class="rules-item"><span>8.</span> <span data-i18n="rule_8">Dilarang memasuki...</span></div>
+                  <div class="rules-item"><span>9.</span> <span data-i18n="rule_9">Jika mengkonsumsi obat...</span></div>
+                </div>
+              </div>
+
+              <!-- FIRST AID -->
+              <div class="rules-section">
+                <h3 data-i18n="rules_fa_title">FIRST AID / PERTOLONGAN PERTAMA</h3>
+                <p data-i18n="rules_fa_desc">Perlengkapan P3K diperlukan...</p>
+              </div>
+
+              <!-- FACILITY -->
+              <div class="rules-section">
+                <h3 data-i18n="rules_fac_title">FACILITY / FASILITAS</h3>
+                <div class="rules-list">
+                  <div class="rules-item"><span>1.</span> <span data-i18n="rules_fac_1">Toilet berada diluar kantor</span></div>
+                  <div class="rules-item"><span>2.</span> <span data-i18n="rules_fac_2">Air minum layak konsumsi...</span></div>
+                  <div class="rules-item"><span>3.</span> <span data-i18n="rules_fac_3">Area parkir tersedia...</span></div>
+                </div>
+              </div>
+
+              <!-- CONTRACTOR -->
+              <div class="rules-section">
+                <h3 data-i18n="rules_cont_title">CONTRACTOR / KONTRAKTOR</h3>
+                <div class="rules-list">
+                  <div class="rules-item"><span>1.</span> <span data-i18n="rules_cont_1">Kontraktor harus selalu mengisi daftar hadir</span></div>
+                  <div class="rules-item"><span>2.</span> <span data-i18n="rules_cont_2">Dilarang memulai pekerjaan tanpa Ijin Kerja</span></div>
+                  <div class="rules-item"><span>3.</span> <span data-i18n="rules_cont_3">Pahami JSA untuk mengetahui resiko</span></div>
+                  <div class="rules-item"><span>4.</span> <span data-i18n="rules_cont_4">Jagalah kebersihan area kerja</span></div>
+                </div>
+              </div>
+
+              <!-- BASIC SAFETY RULES -->
+              <div class="rules-section">
+                <h3 data-i18n="rules_bsr_title">BASIC SAFETY RULES / ATURAN POKOK KESELAMATAN</h3>
+                <div class="rules-list">
+                  <div class="rules-item"><span>1.</span> <span data-i18n="rules_bsr_1">Dilarang operasikan peralatan tanpa wewenang</span></div>
+                  <div class="rules-item"><span>2.</span> <span data-i18n="rules_bsr_2">Dilarang jalankan peralatan tanpa isolasi</span></div>
+                  <div class="rules-item"><span>3.</span> <span data-i18n="rules_bsr_3">Dilarang lepas/potong APD</span></div>
+                  <div class="rules-item"><span>4.</span> <span data-i18n="rules_bsr_4">Dilarang kerja di ketinggian tanpa APD</span></div>
+                  <div class="rules-item"><span>5.</span> <span data-i18n="rules_bsr_5">Dilarang gunakan alat angkat tanpa wewenang</span></div>
+                  <div class="rules-item"><span>6.</span> <span data-i18n="rules_bsr_6">Dilarang masuk area terbatas tanpa otorisasi</span></div>
+                </div>
+              </div>
+
+              <!-- PPE -->
+              <div class="rules-section">
+                <h3 data-i18n="rules_ppe_title">APD / PPE</h3>
+                <p data-i18n="rules_ppe_desc">Apabila diperlukan, APD akan diberikan...</p>
+              </div>
+
+              <!-- ENV -->
+              <div class="rules-section">
+                <h3 data-i18n="rules_env_title">ENVIRONMENT / LINGKUNGAN</h3>
+                <p data-i18n="rules_env_desc">Buanglah sampah pada tempat sampah...</p>
+              </div>
+
+              <!-- SMOKE -->
+              <div class="rules-section">
+                <h3 data-i18n="rules_smoke_title">SMOKING / LARANGAN MEROKOK</h3>
+                <p data-i18n="rules_smoke_desc">Merokok hanya diperbolehkan di TKM...</p>
+              </div>
+            </div>
+
+            <!-- Confirmation Checkbox -->
+            <div class="rules-footer">
+              <label class="confirm-checkbox-wrapper">
+                <input type="checkbox" id="check-rules-understood" />
+                <span class="checkbox-custom"></span>
+                <span class="checkbox-label" data-i18n="Saya menyatakan telah membaca, memahami, dan akan menaati seluruh peraturan keselamatan PT Kemitraan MNK BME selama berada di Jobsite PT Bumi Suksesindo.">
+                  Saya menyatakan telah membaca, memahami, dan akan menaati seluruh peraturan keselamatan PT Kemitraan MNK BME selama berada di Jobsite PT Bumi Suksesindo.
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+      </main>
+
+    </div><!-- /video-layout -->
+
+    <!-- Page Actions -->
+    <div class="page-actions">
+      <button class="btn btn-secondary" onclick="window.location.href='index.html'">
+        <span aria-hidden="true">⬅️</span> <span data-i18n="Kembali">Kembali</span>
+      </button>
+      <button class="btn btn-primary" id="btn-complete" onclick="completeInduction()" disabled aria-disabled="true">
+        <span data-i18n="Lanjut ke Pernyataan">Lanjut ke Pernyataan</span> <span aria-hidden="true">➡️</span>
+      </button>
+    </div>
+
+  </div><!-- /page-wrapper -->
+
+  <!-- Quiz Modal -->
+  <div class="modal-overlay" id="quiz-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <div class="modal-icon" aria-hidden="true">📋</div>
+      <h2 class="modal-title" id="modal-title" data-i18n="Pertanyaan Pemahaman">Pertanyaan Pemahaman</h2>
+      <p class="modal-desc">
+        <span data-i18n="Anda telah selesai menonton:">Anda telah selesai menonton:</span><br />
+        <span class="modal-video-name" id="modal-video-name">—</span><br /><br />
+        <span data-i18n="Apakah Anda memahami seluruh materi yang disampaikan dalam video ini?">Apakah Anda memahami seluruh materi yang disampaikan dalam video ini?</span>
+      </p>
+
+      <div class="quiz-options" role="radiogroup" aria-label="Pilih jawaban Anda">
+        <label class="quiz-option" id="option-yes" for="answer-yes" aria-label="Ya, saya memahami">
+          <input type="radio" name="quiz-answer" id="answer-yes" value="yes" />
+          <div class="quiz-option-dot"></div>
+          <span data-i18n="Ya, saya memahami materi video ini">Ya, saya memahami materi video ini</span>
+          <span class="quiz-option-emoji" aria-hidden="true">✅</span>
+        </label>
+        <label class="quiz-option" id="option-no" for="answer-no" aria-label="Tidak, saya kurang mengerti">
+          <input type="radio" name="quiz-answer" id="answer-no" value="no" />
+          <div class="quiz-option-dot"></div>
+          <span data-i18n="Tidak, saya kurang mengerti">Tidak, saya kurang mengerti</span>
+          <span class="quiz-option-emoji" aria-hidden="true">❌</span>
+        </label>
+      </div>
+
+      <div class="quiz-warning" id="quiz-warning" role="alert" aria-live="polite">
+        <span aria-hidden="true">⚠️</span>
+        <div data-i18n="Anda dapat menonton ulang video ini untuk lebih memahami materinya. Pilih <strong>&quot;Ya&quot;</strong> setelah Anda merasa memahami untuk melanjutkan.">Anda dapat menonton ulang video ini untuk lebih memahami materinya. Pilih <strong>"Ya"</strong> setelah Anda merasa memahami untuk melanjutkan.</div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="btn-replay" onclick="replayVideo()" aria-label="Putar ulang video">
+          <span aria-hidden="true">🔄</span> <span data-i18n="Putar Ulang">Putar Ulang</span>
+        </button>
+        <button class="btn btn-submit" id="btn-submit-quiz" onclick="submitQuiz()" disabled aria-label="Submit jawaban" aria-disabled="true" data-i18n="Submit Jawaban">
+          Submit Jawaban
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="alert" aria-live="polite"></div>
+
+  <!-- PWA -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js'); });
+    }
+    function onYouTubeIframeAPIReady() {
+      window._ytApiReady = true;
+      if (window._pendingLoad) window._pendingLoad();
+    }
+  </script>
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/video.js"></script>
+
+</body>
+</html>

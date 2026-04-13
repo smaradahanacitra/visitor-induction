@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Admin Login | Visitor Induction PT Kemitraan MNK BME</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    body { background: var(--bg-primary); display: flex; flex-direction: column; min-height: 100vh; }
+    .page-wrapper { display: flex; flex-direction: column; min-height: 100vh; position: relative; z-index: 1; }
+    .login-container { width: 100%; max-width: 420px; margin: auto; padding: 2rem; animation: slideUp 0.5s ease-out; }
+    .login-container { width: 100%; max-width: 420px; animation: slideUp 0.5s ease-out; }
+    .login-card { padding: 3rem 2.5rem; text-align: center; }
+    .login-logo { width: 80px; height: 80px; margin: 0 auto 1.5rem; background: rgba(255,107,0,0.1); border-radius: 16px; padding: 10px; display: flex; align-items: center; justify-content: center; }
+    .login-logo img { width: 100%; height: 100%; object-fit: contain; }
+    .login-header h1 { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+    .login-header p { font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 2.5rem; }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+
+  <div class="bg-decoration" aria-hidden="true"></div>
+
+  <div class="page-wrapper">
+    <!-- Company Strip -->
+    <div class="company-strip" aria-label="Informasi perusahaan">
+      <strong>PT Kemitraan MNK BME</strong> &nbsp;·&nbsp; Jobsite PT Bumi Suksesindo (BSI)
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="nav-brand">
+        <div class="nav-logo-box">
+          <img src="../assets/logos/kmb.png" alt="Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+          <span class="logo-placeholder" style="display:none;">MNK<br>BME</span>
+        </div>
+        <div class="nav-title-group">
+          <span class="navbar-title">PT Kemitraan MNK BME</span>
+          <span class="navbar-subtitle">Jobsite PT Bumi Suksesindo</span>
+        </div>
+      </div>
+    </nav>
+
+    <div class="login-container">
+    <div class="card login-card">
+      <div class="login-logo">
+        <img src="../assets/logos/kmb.png" alt="Logo" onerror="this.src='https://raw.githubusercontent.com/stackblitz/stackblitz-images/main/mnk-bme-logo.png'">
+      </div>
+      <div class="login-header">
+        <h1>Admin <span class="gradient-text">Portal</span></h1>
+        <p>Silakan login untuk memantau data visitor</p>
+      </div>
+
+      <form id="admin-login-form" onsubmit="handleLogin(event)">
+        <div class="form-group" style="text-align:left; margin-bottom:1.5rem;">
+          <label class="form-label">NRP / Email</label>
+          <input type="text" id="admin-nrp" class="form-input" placeholder="Masukkan NRP atau Email..." required />
+        </div>
+
+        <div class="form-group" style="text-align:left; margin-bottom:2rem;">
+          <label class="form-label">Password</label>
+          <input type="password" id="admin-password" class="form-input" placeholder="••••••••" required />
+        </div>
+
+        <button type="submit" id="btn-login" class="btn btn-primary" style="margin-top:0;">
+          Masuk ke Dashboard
+        </button>
+      </form>
+
+      <div style="margin-top:2rem;">
+        <a href="../index.html" style="font-size:0.85rem; color:var(--text-muted); text-decoration:none; display:flex; align-items:center; justify-content:center; gap:0.5rem; font-weight:600;">
+          ← Kembali ke Halaman Utama
+        </a>
+      </div>
+    </div>
+  </div>
+  </div> <!-- /page-wrapper -->
+
+  <div class="toast" id="toast" role="alert" aria-live="polite"></div>
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase-config.js"></script>
+  <script src="../js/admin-login.js"></script>
+
+</body>
+</html>

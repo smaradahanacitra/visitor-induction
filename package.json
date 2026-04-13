@@ -1,0 +1,13 @@
+{
+  "name": "visitor-induction",
+  "version": "1.0.0",
+  "description": "Visitor Safety Induction Web App - PWA",
+  "scripts": {
+    "dev": "vite --port 4500 --open",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.2.0"
+  }
+}

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#080d1a" />
+  <meta name="description" content="Program induksi keselamatan kerja untuk visitor PT Kemitraan MNK BME di Jobsite PT Bumi Suksesindo." />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Visitor Induction BSI" />
+
+  <title>Visitor Induction — PT Kemitraan MNK BME | PT Bumi Suksesindo</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/png" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="bg-decoration" aria-hidden="true"></div>
+
+  <div class="page-wrapper">
+
+    <!-- Company Strip -->
+    <div class="company-strip" aria-label="Informasi perusahaan">
+      <strong>PT Kemitraan MNK BME</strong> &nbsp;·&nbsp; Jobsite PT Bumi Suksesindo (BSI)
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="nav-brand">
+        <div class="nav-logo-box">
+          <img src="assets/logos/kmb.png" alt="Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+          <span class="logo-placeholder" style="display:none;">MNK<br>BME</span>
+        </div>
+        <div class="nav-title-group">
+          <span class="navbar-title">PT Kemitraan MNK BME</span>
+          <span class="navbar-subtitle" data-i18n="Jobsite PT Bumi Suksesindo">Jobsite PT Bumi Suksesindo</span>
+        </div>
+      </div>
+      <div class="navbar-actions">
+        <div class="nav-security-badge">
+          <span aria-hidden="true">🔒</span>
+          <span data-i18n="End-to-End Encrypted">End-to-End Encrypted</span>
+        </div>
+        <div class="lang-selector">
+          <button id="btn-lang-id" class="lang-btn active" onclick="switchLanguage('id')">ID</button>
+          <button id="btn-lang-en" class="lang-btn" onclick="switchLanguage('en')">EN</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Step Progress -->
+    <div class="step-progress" aria-label="Tahapan program induksi">
+      <div class="step-item">
+        <div class="step-dot active"><div class="step-num">1</div>Data Diri</div>
+      </div>
+      <div class="step-connector" aria-hidden="true"></div>
+      <div class="step-item">
+        <div class="step-dot inactive"><div class="step-num">2</div>Video &amp; Formulir</div>
+      </div>
+      <div class="step-connector" aria-hidden="true"></div>
+      <div class="step-item">
+        <div class="step-dot inactive"><div class="step-num">3</div>Pernyataan</div>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" role="main">
+      <div class="hero-badge">
+        <span aria-hidden="true">🛡️</span>
+        Keselamatan &amp; Kesehatan Kerja
+      </div>
+      <h1 class="hero-title">
+        <span data-i18n="Selamat Datang di">Selamat Datang di</span><br />
+        <span class="gradient-text">Visitor Induction Program</span>
+      </h1>
+      <p class="hero-desc" data-i18n="Sebelum memasuki area kerja PT Kemitraan MNK BME di Jobsite PT Bumi Suksesindo, Anda wajib menyelesaikan program induksi keselamatan ini. Silakan lengkapi data diri Anda terlebih dahulu.">
+        Sebelum memasuki area kerja PT Kemitraan MNK BME di Jobsite PT Bumi Suksesindo, Anda wajib menyelesaikan
+        program induksi keselamatan ini. Silakan lengkapi data diri Anda terlebih dahulu.
+      </p>
+
+      <div class="info-steps" aria-label="Langkah-langkah induksi">
+        <div class="info-step"><span class="step-icon" aria-hidden="true">📋</span><span>Isi Data Diri</span></div>
+        <div class="info-step"><span class="step-icon" aria-hidden="true">▶️</span><span>Tonton 2 Video</span></div>
+        <div class="info-step"><span class="step-icon" aria-hidden="true">📝</span><span>Formulir Induksi</span></div>
+        <div class="info-step"><span class="step-icon" aria-hidden="true">✍️</span><span>Pernyataan</span></div>
+      </div>
+    </section>
+
+    <!-- Registration Form -->
+    <section class="form-container" aria-label="Form registrasi visitor">
+      <div class="card form-card">
+
+        <div class="form-header">
+          <div class="form-header-icon" aria-hidden="true">📝</div>
+          <div>
+            <h2 data-i18n="Data Diri Visitor">Data Diri Visitor</h2>
+            <p data-i18n="Semua field wajib diisi dengan lengkap dan benar">Semua field wajib diisi dengan lengkap dan benar</p>
+          </div>
+        </div>
+
+        <form id="registration-form" novalidate>
+          <div class="form-grid">
+
+            <div class="form-group full-width">
+              <label class="form-label" for="nama">Nama Lengkap <span class="required" aria-hidden="true">*</span></label>
+              <input class="form-input" type="text" id="nama" name="nama"
+                placeholder="Masukkan nama lengkap Anda" autocomplete="name" required aria-required="true" aria-describedby="nama-error" />
+              <span class="error-msg" id="nama-error" role="alert"><span aria-hidden="true">⚠️</span> Nama lengkap wajib diisi</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="perusahaan">Perusahaan <span class="required" aria-hidden="true">*</span></label>
+              <input class="form-input" type="text" id="perusahaan" name="perusahaan"
+                placeholder="Nama perusahaan / instansi" autocomplete="organization" required aria-required="true" aria-describedby="perusahaan-error" />
+              <span class="error-msg" id="perusahaan-error" role="alert"><span aria-hidden="true">⚠️</span> Nama perusahaan wajib diisi</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="jabatan">Jabatan <span class="required" aria-hidden="true">*</span></label>
+              <input class="form-input" type="text" id="jabatan" name="jabatan"
+                placeholder="Jabatan / posisi Anda" autocomplete="organization-title" required aria-required="true" aria-describedby="jabatan-error" />
+              <span class="error-msg" id="jabatan-error" role="alert"><span aria-hidden="true">⚠️</span> Jabatan wajib diisi</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="no_telpon">No. Telepon <span class="required" aria-hidden="true">*</span></label>
+              <input class="form-input" type="tel" id="no_telpon" name="no_telpon"
+                placeholder="Contoh: 0812-3456-7890" autocomplete="tel" required aria-required="true" aria-describedby="notelp-error" />
+              <span class="error-msg" id="notelp-error" role="alert"><span aria-hidden="true">⚠️</span> Nomor telepon wajib diisi</span>
+            </div>
+
+            <div class="form-group full-width">
+              <label class="form-label" for="alamat">Alamat <span class="required" aria-hidden="true">*</span></label>
+              <input class="form-input" type="text" id="alamat" name="alamat"
+                placeholder="Alamat lengkap Anda" autocomplete="street-address" required aria-required="true" aria-describedby="alamat-error" />
+              <span class="error-msg" id="alamat-error" role="alert"><span aria-hidden="true">⚠️</span> Alamat wajib diisi</span>
+            </div>
+
+            <div class="form-divider" role="separator">
+              <div class="form-divider-line"></div>
+              <div class="form-divider-label"><span aria-hidden="true">🚨</span><span data-i18n="Kontak Darurat">Kontak Darurat</span></div>
+              <div class="form-divider-line"></div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="emergency_telp">No. Telepon Darurat <span class="required" aria-hidden="true">*</span></label>
+              <input class="form-input" type="tel" id="emergency_telp" name="emergency_telp"
+                placeholder="No. telepon yang bisa dihubungi" autocomplete="tel" required aria-required="true" aria-describedby="emtelp-error" />
+              <span class="error-msg" id="emtelp-error" role="alert"><span aria-hidden="true">⚠️</span> No. telepon darurat wajib diisi</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="emergency_nama">Nama Kontak Darurat <span class="required" aria-hidden="true">*</span></label>
+              <input class="form-input" type="text" id="emergency_nama" name="emergency_nama"
+                placeholder="Nama lengkap kontak darurat" required aria-required="true" aria-describedby="emname-error" />
+              <span class="error-msg" id="emname-error" role="alert"><span aria-hidden="true">⚠️</span> Nama kontak darurat wajib diisi</span>
+            </div>
+
+            <div class="form-group full-width">
+              <label class="form-label" for="emergency_relasi">Hubungan dengan Kontak Darurat <span class="required" aria-hidden="true">*</span></label>
+              <select class="form-input" id="emergency_relasi" name="emergency_relasi" required aria-required="true" aria-describedby="emrelasi-error">
+                <option value="">-- Pilih hubungan --</option>
+                <option value="Suami/Istri">Suami / Istri</option>
+                <option value="Orang Tua">Orang Tua</option>
+                <option value="Saudara Kandung">Saudara Kandung</option>
+                <option value="Anak">Anak</option>
+                <option value="Keluarga Lainnya">Keluarga Lainnya</option>
+                <option value="Rekan Kerja">Rekan Kerja</option>
+                <option value="Teman">Teman</option>
+              </select>
+              <span class="error-msg" id="emrelasi-error" role="alert"><span aria-hidden="true">⚠️</span> Pilih hubungan dengan kontak darurat</span>
+            </div>
+
+          </div>
+
+          <div class="page-actions" style="padding: 2rem 0 0 0; margin: 0; max-width: none;">
+            <button class="btn btn-primary" type="submit" id="submit-btn" aria-label="Lanjut ke video induksi">
+              <div class="spinner" aria-hidden="true"></div>
+              <span class="btn-text">Lanjut ke Video Induksi &rarr;</span>
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </section>
+
+  </div>
+
+  <div class="toast" id="toast" role="alert" aria-live="polite"></div>
+
+  <!-- PWA Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(r => console.log('[SW] Registered:', r.scope))
+          .catch(e => console.warn('[SW] Failed:', e));
+      });
+    }
+  </script>
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/registration.js"></script>
+</body>
+</html>
