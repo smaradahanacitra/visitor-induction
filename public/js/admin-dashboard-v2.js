@@ -71,6 +71,12 @@ function updateStats() {
   document.getElementById('stat-completed').textContent = completed;
 }
 
+// ── Helpers ────────────────────────────────────────────────────
+const t = (key) => {
+  const lang = window.currentLang || 'id';
+  return (translations[lang] && translations[lang][key]) ? translations[lang][key] : key;
+};
+
 // ── Rendering ──────────────────────────────────────────────────
 function renderTable() {
   const tbody = document.getElementById('visitor-table-body');
@@ -102,7 +108,7 @@ function renderTable() {
         ${v.completed_at ? formatDate(v.completed_at) : '<span style="color:#aaa;">Belum Selesai</span>'}
       </td>
       <td style="text-align:right;">
-        <button class="btn-action" onclick="viewDetails('${v.id}')">Lihat Detail</button>
+        <button class="btn-action" onclick="viewDetails('${v.id}')" data-i18n="Lihat Detail">${t('Lihat Detail')}</button>
       </td>
     </tr>
   `).join('');
@@ -144,12 +150,6 @@ function viewDetails(id) {
   const modal = document.getElementById('detail-modal');
   const body = document.getElementById('modal-body-content');
   const btnDownload = document.getElementById('btn-download-pdf');
-  
-  // Translation helper
-  const t = (key) => {
-    const lang = window.currentLang || 'id';
-    return (translations[lang] && translations[lang][key]) ? translations[lang][key] : key;
-  };
   
   // Fill Modal Body
   const health = visitor.health_data || {};
