@@ -286,9 +286,44 @@ const translations = {
     "Sebutkan alergi Anda...": "State your allergies...",
     "Sebutkan obat yang dikonsumsi...": "State medication consumed...",
     "TELAH DISETUJUI SECARA DIGITAL": "DIGITALLY APPROVED",
-    "SIGNATURE / TANDA TANGAN": "SIGNATURE"
+    "SIGNATURE / TANDA TANGAN": "SIGNATURE",
+    
+    // Additional for consistency
+    "Jobsite PT Bumi Suksesindo": "PT Bumi Suksesindo Jobsite",
+    "End-to-End Encrypted": "End-to-End Encrypted",
+    "Tanamkan Keselamatan, Panen Kebahagiaan": "Safe Practice, Happy Life"
   },
   id: {
+    // Navbar & Security
+    "Jobsite PT Bumi Suksesindo": "Jobsite PT Bumi Suksesindo",
+    "End-to-End Encrypted": "End-to-End Encrypted",
+    "Tanamkan Keselamatan, Panen Kebahagiaan": "Tanamkan Keselamatan, Panen Kebahagiaan",
+    "Visitor Induction": "Visitor Induction",
+
+    // Landing Page
+    "Selamat Datang di": "Selamat Datang di",
+    "Silakan pilih kategori akses Anda untuk melanjutkan": "Silakan pilih kategori akses Anda untuk melanjutkan",
+    "Tamu": "Tamu",
+    "Karyawan": "Karyawan",
+    "Masuk Sebagai Tamu": "Masuk Sebagai Tamu",
+    "Masuk Sebagai Karyawan": "Masuk Sebagai Karyawan",
+    "Mulai Sesi Induksi": "Mulai Sesi Induksi",
+    "Monitor Data & Dashboard": "Monitor Data & Dashboard",
+    "Pilih Bahasa": "Pilih Bahasa",
+
+    // Registration Page Items
+    "Data Diri": "Data Diri",
+    "Video & Formulir": "Video & Formulir",
+    "Video & Aturan": "Video & Aturan",
+    "Pernyataan": "Pernyataan",
+    "Isi Data Diri": "Isi Data Diri",
+    "Tonton 2 Video": "Tonton 2 Video",
+    "Formulir Induksi": "Formulir Induksi",
+    "Data Diri Visitor": "Data Diri Visitor",
+    "Semua field wajib diisi dengan lengkap dan benar": "Semua field wajib diisi dengan lengkap dan benar",
+    "Kontak Darurat": "Kontak Darurat",
+    "Lanjut ke Video Induksi →": "Lanjut ke Video Induksi →",
+    "Sebelum memasuki area kerja PT Kemitraan MNK BME di Jobsite PT Bumi Suksesindo, Anda wajib menyelesaikan program induksi keselamatan ini. Silakan lengkapi data diri Anda terlebih dahulu.": "Sebelum memasuki area kerja PT Kemitraan MNK BME di Jobsite PT Bumi Suksesindo, Anda wajib menyelesaikan program induksi keselamatan ini. Silakan lengkapi data diri Anda terlebih dahulu.",
     "rules_evac_title": "IDENTIFIKASI TITIK KUMPUL EVAKUASI",
     "rules_evac_desc": "Kenali titik kumpul evakuasi. Jika ada instruksi / sirene evakuasi di fasilitas akomodasi atau pabrik, berkumpullah di titik kumpul evakuasi dan tetap disana sampai ada anjuran lebih lanjut.",
     "rules_map_caption": "Identifikasi titik kumpul evakuasi (Muster Point)",
@@ -564,3 +599,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const savedLang = localStorage.getItem('preferredLanguage') || 'id';
   switchLanguage(savedLang);
 });
+
+// Expose to window for HTML onclick handlers
+window.switchLanguage = switchLanguage;

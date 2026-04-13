@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Admin Dashboard | Visitor Induction PT Kemitraan MNK BME</title>
+  <link rel="icon" type="image/png" href="../assets/logos/kmb.png" />
+  <link rel="apple-touch-icon" href="../assets/logos/kmb.png" />
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -60,7 +61,13 @@
       </div>
       <div class="nav-title-group">
         <span class="navbar-title">PT Kemitraan MNK BME</span>
-        <span class="navbar-subtitle">Jobsite PT Bumi Suksesindo</span>
+        <span class="navbar-subtitle" data-i18n="Jobsite PT Bumi Suksesindo">Jobsite PT Bumi Suksesindo</span>
+      </div>
+    </div>
+    <div class="navbar-actions">
+      <div class="lang-selector">
+        <button id="btn-lang-id" class="lang-btn active" onclick="switchLanguage('id')">ID</button>
+        <button id="btn-lang-en" class="lang-btn" onclick="switchLanguage('en')">EN</button>
       </div>
     </div>
   </nav>
@@ -152,6 +159,7 @@
   <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="../js/supabase-config.js"></script>
+  <script src="../js/i18n.js"></script>
   <script src="../js/admin-dashboard.js"></script>
 
 </body>
