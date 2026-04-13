@@ -270,8 +270,8 @@ function preparePrintForm(visitor, health) {
   const fitVal = health.fit_to_work;
   const fyEl = document.getElementById('fit-y');
   const fnEl = document.getElementById('fit-n');
-  if (fyEl) fyEl.textContent = (fitVal === 'ya') ? '✓' : '';
-  if (fnEl) fnEl.textContent = (fitVal === 'tidak') ? '✓' : '';
+  if (fyEl) fyEl.textContent = (fitVal === 'yes') ? '✓' : '';
+  if (fnEl) fnEl.textContent = (fitVal === 'no') ? '✓' : '';
 }
 
 // ── PDF Export Logic ───────────────────────────────────────────────
