@@ -62,14 +62,6 @@
     .health-item:last-child { border-bottom: none; }
     @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-    /* Print Template Styles (Hidden but accessible) */
-    #print-area { 
-      display: block !important;
-      visibility: hidden !important; 
-      position: fixed; 
-      left: -9999px; 
-      top: 0;
-    }
   </style>
 </head>
 <body>
@@ -203,7 +195,7 @@
   </div>
 
   <!-- Hidden Print Area for PDF -->
-  <div id="print-area" class="print-only" style="display:none; position:fixed; left:-9999px;">
+  <div id="print-area" class="print-only">
     <!-- PAGE 1 (Induction Rules Part 1) -->
     <div class="print-page">
       <div class="print-header">
